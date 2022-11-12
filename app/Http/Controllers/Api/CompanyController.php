@@ -41,7 +41,7 @@ class CompanyController extends Controller
             $company = Company::create(
                 [
                     'company_name'=> $request->company_name,
-                    'company_logo'=> $file,
+                    'company_logo'=> $fileName,
                     'company_address'=> $request->company_address,
                     'company_website'=> $request->company_website,
                     'company_email'=> $request->company_email,
