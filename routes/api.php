@@ -22,7 +22,9 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get("/getJobs", [JobPostController::class, 'index']);
+});
 Route::post('/company/create', [CompanyController::class, 'create']);
 Route::post('/company/login', [CompanyController::class, 'companyLogin']);
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\JobPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class JobPostController extends Controller
 {
@@ -16,7 +17,29 @@ class JobPostController extends Controller
     public function index()
     {
         //
-        return JobPost::get();
+        $jobs = DB::table("job_posts")
+        ->join('companies', 'companies.id', '=', 'job_posts.id')
+        ->select(
+           "job_posts.job_title as job_title",
+           "job_posts.job_description as job_description",
+           "job_posts.salary as salary",
+           "job_posts.status as status",
+           "job_posts.expire_date as expire_date",
+           "job_posts.created_at as created_at",
+           "job_posts.updated_at as updated_at",
+           "companies.id as company_id",
+           "companies.company_name as company_name",
+           "companies.company_logo as company_logo",
+           "companies.company_address as company_address",
+           "companies.company_website as company_website",
+           "companies.company_website as company_website",
+        )->get();
+        $response = [
+            'success' => true,
+            'data' => $jobs,
+            'message' => 'All jobs display successfully'
+        ];
+        return Response()->json($response, 200);
     }
 
     /**
