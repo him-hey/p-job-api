@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::middleware('auth:sanctum')->group(function () {
     Route::get("/getJobs", [JobPostController::class, 'index']);
+    Route::get("/jobDetail/{id}", [JobPostController::class, 'show']);
 });
 Route::post('/company/create', [CompanyController::class, 'create']);
 Route::post('/company/login', [CompanyController::class, 'companyLogin']);

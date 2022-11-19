@@ -20,6 +20,7 @@ class JobPostController extends Controller
         $jobs = DB::table("job_posts")
         ->join('companies', 'companies.id', '=', 'job_posts.id')
         ->select(
+           "job_posts.id as job_id",
            "job_posts.job_title as job_title",
            "job_posts.job_description as job_description",
            "job_posts.salary as salary",
@@ -82,6 +83,31 @@ class JobPostController extends Controller
     public function show($id)
     {
         //
+        $job = DB::table("job_posts")
+        ->join('companies', 'companies.id', '=', 'job_posts.id')
+        ->select(
+           "job_posts.id as job_id",
+           "job_posts.job_title as job_title",
+           "job_posts.job_description as job_description",
+           "job_posts.salary as salary",
+           "job_posts.status as status",
+           "job_posts.expire_date as expire_date",
+           "job_posts.created_at as created_at",
+           "job_posts.updated_at as updated_at",
+           "companies.id as company_id",
+           "companies.company_name as company_name",
+           "companies.company_logo as company_logo",
+           "companies.company_address as company_address",
+           "companies.company_website as company_website",
+           "companies.company_website as company_website",
+        )->where('job_posts.id', '=', $id)
+        ->get();
+        $response = [
+            'success' => true,
+            'data' => $job,
+            'message' => 'job display successfully'
+        ];
+        return Response()->json($response, 200);
     }
 
     /**
