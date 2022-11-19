@@ -67,6 +67,7 @@ class JobPostController extends Controller
         $job->job_description = $request->job_description;
         $job->salary = $request->salary;
         $job->company_id = $request->company_id;
+        $job->expire_date = $request->expire_date;
         $job->save();
         return response()->json([
             'status' => true,
@@ -140,6 +141,17 @@ class JobPostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $job = JobPost::find($id);
+        $job->job_title = $request->job_title;
+        $job->job_description = $request->job_description;
+        $job->salary = $request->salary;
+        $job->company_id = $request->company_id;
+        $job->save();
+        return response()->json([
+            'status' => true,
+            'message' => 'Job posted!',
+        ], 200);
+        
     }
 
     /**
