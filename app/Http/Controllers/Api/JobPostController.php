@@ -119,6 +119,15 @@ class JobPostController extends Controller
     public function edit($id)
     {
         //
+        $job = JobPost::find($id);
+        $job->status = 1;
+        $job->save();
+        $response = [
+            'success' => true,
+            'data' => $job,
+            'message' => 'job closed successfully'
+        ];
+        return Response()->json($response, 200);
     }
 
     /**
