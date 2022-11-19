@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get("/jobDetail/{id}", [JobPostController::class, 'show']);
     Route::get("/closeJob/{id}", [JobPostController::class, 'edit']);
     Route::delete("/deleteJob/{id}", [JobPostController::class, 'destroy']);
+    Route::put("/updateJob/{id}", [JobPostController::class, 'update']);
 });
 Route::post('/company/create', [CompanyController::class, 'create']);
 Route::post('/company/login', [CompanyController::class, 'companyLogin']);
