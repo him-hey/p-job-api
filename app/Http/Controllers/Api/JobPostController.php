@@ -163,5 +163,13 @@ class JobPostController extends Controller
     public function destroy($id)
     {
         //
+        $job = JobPost::find($id);
+        $job->delete();
+        $response = [
+            'success' => true,
+            'data' => $job,
+            'message' => 'job has been deleted'
+        ];
+        return Response()->json($response, 200);
     }
 }
