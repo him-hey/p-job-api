@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Validator;
 class CompanyController extends Controller
 {
     //
+    public function index(){
+        $companies = Company::all();
+        return $companies;
+    }
     public function create(Request $request){
         try {
             $validateCompany = Validator::make($request->all(),[
