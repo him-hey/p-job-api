@@ -63,21 +63,13 @@ class AuthController extends Controller
                     'error' => $validateUser->errors(),
                 ], 401);
             }
-            $path = public_path('profile');
-            if (!file_exists($path)) {
-                mkdir($path, 0777, true);
-            }
-            $file = $request->file('profile');
-            if ($file != null) {
-                $fileName = uniqid() . '_' . trim($file->getClientOriginalName());
-                $file->move($path, $fileName);
-            }
+       
             $user = User::create(
                 [
                     'name'=> $request->name,
                     'gender'=> $request->gender,
                     'phone'=> $request->phone,
-                    'profile'=> $fileName,
+                    'profile'=> "test.png",
                     'email'=> $request->email,
                     'password'=> Hash::make($request->password),
                 ]

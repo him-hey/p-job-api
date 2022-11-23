@@ -18,7 +18,7 @@ class JobPostController extends Controller
     {
         //
         $jobs = DB::table("job_posts")
-        ->join('companies', 'companies.id', '=', 'job_posts.id')
+        ->join('companies', 'companies.id', '=', 'job_posts.company_id')
         ->select(
            "job_posts.id as job_id",
            "job_posts.job_title as job_title",
@@ -32,7 +32,6 @@ class JobPostController extends Controller
            "companies.company_name as company_name",
            "companies.company_logo as company_logo",
            "companies.company_address as company_address",
-           "companies.company_website as company_website",
            "companies.company_website as company_website",
         )->get();
         $response = [
